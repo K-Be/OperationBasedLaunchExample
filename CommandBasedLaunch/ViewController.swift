@@ -30,10 +30,16 @@ class ViewController: UIViewController {
         self.title = "View Controller"
         self.view.backgroundColor = UIColor.white
         self.navigationItem.rightBarButtonItems = [self.logoutItem]
+
+        self.view.addSubview(self.label)
+
+        self.label.translatesAutoresizingMaskIntoConstraints = false
+        self.label.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        self.label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         guard let sceneDelegate = self.sceneDelegate else {
             assert(false)
             return

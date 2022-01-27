@@ -20,6 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let loginManager = LoginManager()
     let pushCenter = PushNotificationsCenter()
     private var state = SceneState.loading
+    lazy var launcher: ApplicationLauncher = {
+        let launcher = ApplicationLauncher()
+        launcher.sceneDelegate = self
+        return launcher
+    }()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -28,16 +33,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
 
         let window = UIWindow(windowScene: scene)
-        let viewController = ViewController(nibName: nil, bundle: nil)
+        let viewController = UIViewController(nibName: nil, bundle: nil)
         let navController = UINavigationController(rootViewController: viewController)
         window.rootViewController = navController
         self.navController = navController
         self.window = window
         window.makeKeyAndVisible()
-        self.state = .login
+        self.state = .loading
         navController.present(LoadingViewController(nibName: nil, bundle: nil),
                               animated: false,
                               completion: nil)
+        self.launcher.onLaunch()
+        self.subscribeOnNotifications()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -81,6 +88,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func showApplicationUI() {
         let viewController = ViewController(nibName: nil, bundle: nil)
+        viewController.label.text = self.loginManager.userName()
         CATransaction.begin()
         CATransaction.setCompletionBlock {
             self.hideLoadingScreen()
@@ -97,6 +105,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 }
+
+extension SceneDelegate {
+    func subscribeOnNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(logoutNotification(_:)),
+                                               name: LoginManager.didLogoutNotificationName,
+                                               object: self.loginManager)
+    }
+
+    @objc func logoutNotification(_ notification: Notification) {
+        self.launcher.onLogout()
+    }
+}
+
 
 // push notifications
 extension SceneDelegate {

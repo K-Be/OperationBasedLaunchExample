@@ -24,6 +24,7 @@
 		13A2821C27A2539B009A8FB6 /* LoginOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A2821B27A2539B009A8FB6 /* LoginOperation.swift */; };
 		13A2822227A254C8009A8FB6 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A2822127A254C8009A8FB6 /* AsynchronousOperation.swift */; };
 		13A2822427A25636009A8FB6 /* ShowApplicationUIOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A2822327A25636009A8FB6 /* ShowApplicationUIOperation.swift */; };
+		13A2822627A259A7009A8FB6 /* Operation+Threads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A2822527A259A7009A8FB6 /* Operation+Threads.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		13A2821B27A2539B009A8FB6 /* LoginOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOperation.swift; sourceTree = "<group>"; };
 		13A2822127A254C8009A8FB6 /* AsynchronousOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
 		13A2822327A25636009A8FB6 /* ShowApplicationUIOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowApplicationUIOperation.swift; sourceTree = "<group>"; };
+		13A2822527A259A7009A8FB6 /* Operation+Threads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Operation+Threads.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 			children = (
 				13A2820B27A243ED009A8FB6 /* ViewController+SceneDelegate.swift */,
 				13A2822127A254C8009A8FB6 /* AsynchronousOperation.swift */,
+				13A2822527A259A7009A8FB6 /* Operation+Threads.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				13A2820627A23D64009A8FB6 /* LoginViewController.swift in Sources */,
 				13A281F427A239D6009A8FB6 /* ViewController.swift in Sources */,
 				13A2821527A24D7B009A8FB6 /* LoadingViewController.swift in Sources */,
+				13A2822627A259A7009A8FB6 /* Operation+Threads.swift in Sources */,
 				13A2821C27A2539B009A8FB6 /* LoginOperation.swift in Sources */,
 				13A281F027A239D6009A8FB6 /* AppDelegate.swift in Sources */,
 				13A2820C27A243ED009A8FB6 /* ViewController+SceneDelegate.swift in Sources */,

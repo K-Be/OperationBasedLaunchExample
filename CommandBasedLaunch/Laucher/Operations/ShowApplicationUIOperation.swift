@@ -17,7 +17,10 @@ class ShowApplicationUIOperation: Operation {
 
     override func main() {
         super.main()
-        self.sceneDelegate.showLogin()
+        self.syncOnMain {
+            self.sceneDelegate.showApplicationUI()
+        }
+
     }
 
 }

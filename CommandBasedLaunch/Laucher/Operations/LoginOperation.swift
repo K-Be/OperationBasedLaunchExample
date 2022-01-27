@@ -22,7 +22,7 @@ class LoginOperation: AsynchronousOperation {
             self.finish()
             return
         }
-        DispatchQueue.main.async {
+        self.syncOnMain {
             guard !self.sceneDelegate.loginManager.isAuthenticated() else {
                 self.finish()
                 return

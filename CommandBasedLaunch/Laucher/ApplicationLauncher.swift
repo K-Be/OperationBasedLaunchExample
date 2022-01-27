@@ -8,7 +8,7 @@
 import Foundation
 
 class ApplicationLauncher {
-    let queue: OperationQueue = {
+    private let queue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
         queue.qualityOfService = .userInitiated
@@ -17,7 +17,18 @@ class ApplicationLauncher {
     weak var sceneDelegate: SceneDelegate?
 
     func onLaunch() {
+        guard let sceneDelegate = sceneDelegate else {
+            fatalError()
+        }
 
+        let loginOperation = LoginOperation(sceneDelegate: sceneDelegate)
+        let showAppUIOperation = ShowApplicationUIOperation(sceneDelegate: sceneDelegate)
+
+        showAppUIOperation.addDependency(loginOperation)
+
+        [loginOperation, showAppUIOperation].forEach {
+            self.queue.addOperation($0)
+        }
     }
 
     func handlePush() {
@@ -25,6 +36,17 @@ class ApplicationLauncher {
     }
 
     func onLogout() {
+        guard let sceneDelegate = sceneDelegate else {
+            fatalError()
+        }
 
+        let loginOperation = LoginOperation(sceneDelegate: sceneDelegate)
+        let showAppUIOperation = ShowApplicationUIOperation(sceneDelegate: sceneDelegate)
+
+        showAppUIOperation.addDependency(loginOperation)
+
+        [loginOperation, showAppUIOperation].forEach {
+            self.queue.addOperation($0)
+        }
     }
 }
