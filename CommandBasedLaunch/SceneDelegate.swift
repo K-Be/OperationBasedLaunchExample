@@ -41,8 +41,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
         self.state = .loading
         navController.present(LoadingViewController(nibName: nil, bundle: nil),
-                              animated: false,
-                              completion: nil)
+                              animated: false) {
+            }
         self.launcher.onLaunch()
         self.subscribeOnNotifications()
     }
@@ -121,7 +121,11 @@ extension SceneDelegate {
 
 
 // push notifications
-extension SceneDelegate {
-
+extension SceneDelegate: PushNotificationsListener {
+    func pushNotificationsCenter(_ sender: PushNotificationsCenter, gotNotification notification: PushNotification) {
+        let alertController = UIAlertController(title: "Уведомление", message: notification.message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
+        self.navController?.present(alertController, animated: true, completion: nil)
+    }
 }
 

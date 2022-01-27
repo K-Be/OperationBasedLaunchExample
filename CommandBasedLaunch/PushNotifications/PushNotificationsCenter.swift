@@ -20,6 +20,9 @@ class PushNotificationsCenter {
     func subscribeToNotifications(_ listener: PushNotificationsListener, inViewController viewController: UIViewController, withCompletion completion: @escaping (_ result: Bool) -> Void) {
         self.showSubscribeDialog(in: viewController) { allow in
             self.allow = allow
+            if allow {
+                self.listeners.append(listener)
+            }
             completion(allow)
         }
     }

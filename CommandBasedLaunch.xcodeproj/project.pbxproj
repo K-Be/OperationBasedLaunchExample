@@ -100,7 +100,6 @@
 			children = (
 				13A2820427A23D64009A8FB6 /* LoginViewController.swift */,
 				13A2820527A23D64009A8FB6 /* LoginViewController.xib */,
-				13A2820827A23EE8009A8FB6 /* LoginManager.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -108,6 +107,7 @@
 		13A2820A27A243C3009A8FB6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				13A2820827A23EE8009A8FB6 /* LoginManager.swift */,
 				13A2820B27A243ED009A8FB6 /* ViewController+SceneDelegate.swift */,
 				13A2822127A254C8009A8FB6 /* AsynchronousOperation.swift */,
 				13A2822527A259A7009A8FB6 /* Operation+Threads.swift */,
