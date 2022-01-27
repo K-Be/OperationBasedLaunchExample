@@ -7,16 +7,37 @@
 
 import UIKit
 
+enum SceneState {
+    case loading
+    case login
+    case application
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var navController: UINavigationController?
+    let loginManager = LoginManager()
+    let pushCenter = PushNotificationsCenter()
+    private var state = SceneState.loading
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let scene = (scene as? UIWindowScene) else { return }
+
+        let window = UIWindow(windowScene: scene)
+        let viewController = ViewController(nibName: nil, bundle: nil)
+        let navController = UINavigationController(rootViewController: viewController)
+        window.rootViewController = navController
+        self.navController = navController
+        self.window = window
+        window.makeKeyAndVisible()
+        self.state = .login
+        navController.present(LoadingViewController(nibName: nil, bundle: nil),
+                              animated: false,
+                              completion: nil)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -47,6 +68,38 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    func showLogin() {
+        let viewController = LoginViewController(nibName: nil, bundle: nil)
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            self.hideLoadingScreen()
+            self.state = .login
+        }
+        self.navController?.setViewControllers([viewController], animated: true)
+        CATransaction.commit()
+    }
+
+    func showApplicationUI() {
+        let viewController = ViewController(nibName: nil, bundle: nil)
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            self.hideLoadingScreen()
+            self.state = .application
+        }
+        self.navController?.setViewControllers([viewController], animated: true)
+        CATransaction.commit()
+    }
+
+    private func hideLoadingScreen() {
+        if (self.state == .loading) {
+            self.navController?.dismiss(animated: true, completion: nil)
+        }
+    }
+
+}
+
+// push notifications
+extension SceneDelegate {
 
 }
 
