@@ -10,7 +10,6 @@ import Foundation
 class ApplicationLauncher {
     private let queue: OperationQueue = {
         let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 1
         queue.qualityOfService = .userInitiated
         return queue
     }()
