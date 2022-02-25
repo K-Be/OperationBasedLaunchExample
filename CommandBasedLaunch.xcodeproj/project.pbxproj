@@ -25,6 +25,9 @@
 		13A2822227A254C8009A8FB6 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A2822127A254C8009A8FB6 /* AsynchronousOperation.swift */; };
 		13A2822427A25636009A8FB6 /* ShowApplicationUIOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A2822327A25636009A8FB6 /* ShowApplicationUIOperation.swift */; };
 		13A2822627A259A7009A8FB6 /* Operation+Threads.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A2822527A259A7009A8FB6 /* Operation+Threads.swift */; };
+		13A2822827A2713F009A8FB6 /* SubscribeToPushOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A2822727A2713F009A8FB6 /* SubscribeToPushOperation.swift */; };
+		13A2822B27A272E0009A8FB6 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A2822A27A272E0009A8FB6 /* SafariServices.framework */; };
+		13A2822D27A27389009A8FB6 /* OpenURLOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A2822C27A27389009A8FB6 /* OpenURLOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +51,9 @@
 		13A2822127A254C8009A8FB6 /* AsynchronousOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
 		13A2822327A25636009A8FB6 /* ShowApplicationUIOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowApplicationUIOperation.swift; sourceTree = "<group>"; };
 		13A2822527A259A7009A8FB6 /* Operation+Threads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Operation+Threads.swift"; sourceTree = "<group>"; };
+		13A2822727A2713F009A8FB6 /* SubscribeToPushOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeToPushOperation.swift; sourceTree = "<group>"; };
+		13A2822A27A272E0009A8FB6 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		13A2822C27A27389009A8FB6 /* OpenURLOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13A2822B27A272E0009A8FB6 /* SafariServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +73,7 @@
 			children = (
 				13A281EE27A239D6009A8FB6 /* CommandBasedLaunch */,
 				13A281ED27A239D6009A8FB6 /* Products */,
+				13A2822927A272E0009A8FB6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -147,8 +155,18 @@
 			children = (
 				13A2821B27A2539B009A8FB6 /* LoginOperation.swift */,
 				13A2822327A25636009A8FB6 /* ShowApplicationUIOperation.swift */,
+				13A2822727A2713F009A8FB6 /* SubscribeToPushOperation.swift */,
+				13A2822C27A27389009A8FB6 /* OpenURLOperation.swift */,
 			);
 			path = Operations;
+			sourceTree = "<group>";
+		};
+		13A2822927A272E0009A8FB6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				13A2822A27A272E0009A8FB6 /* SafariServices.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,7 +246,9 @@
 				13A2822427A25636009A8FB6 /* ShowApplicationUIOperation.swift in Sources */,
 				13A2820927A23EE8009A8FB6 /* LoginManager.swift in Sources */,
 				13A2820627A23D64009A8FB6 /* LoginViewController.swift in Sources */,
+				13A2822827A2713F009A8FB6 /* SubscribeToPushOperation.swift in Sources */,
 				13A281F427A239D6009A8FB6 /* ViewController.swift in Sources */,
+				13A2822D27A27389009A8FB6 /* OpenURLOperation.swift in Sources */,
 				13A2821527A24D7B009A8FB6 /* LoadingViewController.swift in Sources */,
 				13A2822627A259A7009A8FB6 /* Operation+Threads.swift in Sources */,
 				13A2821C27A2539B009A8FB6 /* LoginOperation.swift in Sources */,

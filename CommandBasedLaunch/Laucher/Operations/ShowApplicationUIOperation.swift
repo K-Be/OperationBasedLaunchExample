@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ShowApplicationUIOperation: Operation {
+class ShowApplicationUIOperation: AsynchronousOperation {
 
     let sceneDelegate: SceneDelegate
 
@@ -18,7 +18,9 @@ class ShowApplicationUIOperation: Operation {
     override func main() {
         super.main()
         self.syncOnMain {
-            self.sceneDelegate.showApplicationUI()
+            self.sceneDelegate.showApplicationUI {
+                self.finish()
+            }
         }
 
     }

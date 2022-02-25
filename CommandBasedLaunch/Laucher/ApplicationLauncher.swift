@@ -22,10 +22,12 @@ class ApplicationLauncher {
 
         let loginOperation = LoginOperation(sceneDelegate: sceneDelegate)
         let showAppUIOperation = ShowApplicationUIOperation(sceneDelegate: sceneDelegate)
+        let askPush = SubscribeToPushOperation(sceneDelegate: sceneDelegate)
 
         showAppUIOperation.addDependency(loginOperation)
+        askPush.addDependency(showAppUIOperation)
 
-        [loginOperation, showAppUIOperation].forEach {
+        [loginOperation, showAppUIOperation, askPush].forEach {
             self.queue.addOperation($0)
         }
     }
@@ -47,5 +49,14 @@ class ApplicationLauncher {
         [loginOperation, showAppUIOperation].forEach {
             self.queue.addOperation($0)
         }
+    }
+
+    func handleURL(_ url: URL) {
+        let operation = OpenURLOperation(sceneDelegate: self.sceneDelegate!, url: url)
+        let currentOperations = self.queue.operations
+        currentOperations.forEach {
+            operation.addDependency($0)
+        }
+        self.queue.addOperation(operation)
     }
 }

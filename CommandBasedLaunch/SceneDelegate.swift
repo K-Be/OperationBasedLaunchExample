@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 enum SceneState {
     case loading
@@ -45,6 +46,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         self.launcher.onLaunch()
         self.subscribeOnNotifications()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
+            let url = URL(string: "https://yandex.ru")!
+            self.systemPrivateMethodForURL(url)
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -75,6 +81,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+
+    func systemPrivateMethodForURL(_ url: URL) {
+        self.launcher.handleURL(url)
+    }
+
+
     func showLogin() {
         let viewController = LoginViewController(nibName: nil, bundle: nil)
         CATransaction.begin()
@@ -86,17 +98,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         CATransaction.commit()
     }
 
-    func showApplicationUI() {
+    func showApplicationUI(withCompletion completion: @escaping () -> Void) {
         let viewController = ViewController(nibName: nil, bundle: nil)
         viewController.label.text = self.loginManager.userName()
         CATransaction.begin()
         CATransaction.setCompletionBlock {
             self.hideLoadingScreen()
             self.state = .application
+            completion()
         }
         self.navController?.setViewControllers([viewController], animated: true)
         CATransaction.commit()
     }
+
+    func askPushNotifications(withCompletion completion: @escaping () -> Void) {
+        self.pushCenter.subscribeToNotifications(self,
+                                                 inViewController: self.navController!) { result in
+            completion()
+        }
+    }
+
+    func openURLInApplication(_ url: URL) {
+        let viewController = SFSafariViewController(url: url)
+        self.navController?.present(viewController, animated: true, completion: nil)
+    }
+
 
     private func hideLoadingScreen() {
         if (self.state == .loading) {
